@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student View - PTC Library</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Student Book Catalog</h1>
+        <p id="welcome-message">Search for books and request to borrow them.</p>
+    </header>
+
+    <nav>
+        <div class="nav-buttons">
+            <a href="index.html" class="btn">Back to Home</a>
+            <button id="logout-btn" class="btn">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search by title or author...">
+        </div>
+
+        <div id="book-list" class="book-list">
+            <!-- Book cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="js/toast.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/student.js"></script>
+
+</body>
+</html>

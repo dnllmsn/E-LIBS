@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Portal - PTC Library</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>Librarian Portal</h1>
+            <p>Login to manage the library system.</p>
+        </div>
+        <nav>
+            <a href="index.html" class="btn">Back to Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="auth-container">
+            <!-- Login Form -->
+            <div class="auth-form" id="login-form">
+                <h2>Librarian Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="loginEmail" required>
+                         <p class="email-note">Format: yourname@paterostechnologicalcollege.edu.ph</p>
+                    </div>
+                    <div class="form-group password-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="password-input-container">
+                            <input type="password" id="loginPassword" name="loginPassword" required>
+                            <span class="toggle-password" id="toggleLoginPassword">
+                                <i class="far fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-full">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="js/toast.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/auth-librarian.js"></script>
+    <script>
+        const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+        const loginPasswordInput = document.getElementById('loginPassword');
+
+        toggleLoginPassword.addEventListener('click', function() {
+            const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            loginPasswordInput.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    </script>
+
+
+</body>
+</html>
