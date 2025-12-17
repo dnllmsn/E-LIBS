@@ -4,30 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student View - PTC Library</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="student-page">
 
-    <header>
-        <h1>Student Book Catalog</h1>
-        <p id="welcome-message">Search for books and request to borrow them.</p>
-    </header>
+    <div class="main-layout">
+        <div class="container">
+            <header>
+                <h1>Student Book Catalog</h1>
+                <p id="welcome-message">Search for books and request to borrow them.</p>
+            </header>
 
-    <nav>
-        <div class="nav-buttons">
-            <a href="index.html" class="btn">Back to Home</a>
-            <button id="logout-btn" class="btn">Logout</button>
+            <nav>
+                <div class="nav-buttons">
+                    <a href="index.html" class="btn">Back to Home</a>
+                    <button id="logout-btn" class="btn">Logout</button>
+                </div>
+            </nav>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search by title or author...">
+            </div>
+
+            <div id="book-list" class="book-list">
+                <!-- Book cards will be dynamically inserted here -->
+            </div>
         </div>
-    </nav>
 
-    <div class="container">
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search by title or author...">
-        </div>
+    </div>
 
-        <div id="book-list" class="book-list">
-            <!-- Book cards will be dynamically inserted here -->
-        </div>
+    <div class="notification-panel">
+        <h2>Notifications</h2>
+        <ul id="notification-list">
+            <!-- Notifications will be dynamically inserted here -->
+        </ul>
     </div>
 
     <div id="toast-container"></div>

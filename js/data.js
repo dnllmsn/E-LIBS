@@ -29,10 +29,11 @@
     { id: 23, title: '"Basics of Nano Computer"', author: 'Roshan Sharma', status: 'Borrowed', cover: 'images/X.png' },
     { id: 24, title: '"Fundamentals of Basic Accounting"', author: 'Leonardo L. Alminia, MBA, CPA', status: 'Reserved', cover: 'images/Y.png' },
     { id: 25, title: '"Understanding the Self: Developing Your Skills"', author: 'Jennifer R. Dela Cruz, PhD', status: 'Pending', cover: 'images/Z.png' },
+    { id: 26, title: 'The Hitchhiker\'s Guide to the Galaxy', author: 'Douglas Adams', status: 'Available', cover: 'images/1.png' },
   ];
 
   const initialRequests = [
-      { id: 1, bookId: 8, studentId: '2023-0001', studentName: 'Alex Doe', status: 'Pending' }
+      { id: 1, bookId: 8, studentId: '2023-0001', studentName: 'Alex Doe', status: 'Pending', read: false }
   ];
 
   // Pre-seeded librarian accounts
@@ -50,17 +51,44 @@
     if (!localStorage.getItem('students')) {
       localStorage.setItem('students', JSON.stringify([])); // Start with no registered students
     }
+    if (!localStorage.getItem('notifications')) {
+      localStorage.setItem('notifications', JSON.stringify([]));
+    }
   }
 
   // --- GLOBAL DATA ACCESS OBJECT ---
   window.appData = {
+    // Store last known state for change detection
+    _lastBooksState: null,
+    _lastRequestsState: null,
+    _lastNotificationsState: null,
+
     // Book management
     getBooks: () => JSON.parse(localStorage.getItem('books') || '[]'),
-    saveBooks: (books) => localStorage.setItem('books', JSON.stringify(books)),
+    saveBooks: (books) => {
+      localStorage.setItem('books', JSON.stringify(books));
+      window.appData._lastBooksState = JSON.stringify(books);
+      // Dispatch custom event for real-time updates within the same tab
+      window.dispatchEvent(new Event('booksUpdated'));
+    },
     
     // Request management
     getRequests: () => JSON.parse(localStorage.getItem('requests') || '[]'),
-    saveRequests: (requests) => localStorage.setItem('requests', JSON.stringify(requests)),
+    saveRequests: (requests) => {
+      localStorage.setItem('requests', JSON.stringify(requests));
+      window.appData._lastRequestsState = JSON.stringify(requests);
+      // Dispatch custom event for real-time updates within the same tab
+      window.dispatchEvent(new Event('requestsUpdated'));
+    },
+
+    // Notification management
+    getNotifications: () => JSON.parse(localStorage.getItem('notifications') || '[]'),
+    saveNotifications: (notifications) => {
+      localStorage.setItem('notifications', JSON.stringify(notifications));
+      window.appData._lastNotificationsState = JSON.stringify(notifications);
+      // Dispatch custom event for real-time updates within the same tab
+      window.dispatchEvent(new Event('notificationsUpdated'));
+    },
 
     // Student management
     getStudents: () => JSON.parse(localStorage.getItem('students') || '[]'),
@@ -78,6 +106,43 @@
         sessionStorage.removeItem('currentUser');
         initializeData();
         console.log('Librarian data and current user session reset.');
+    },
+
+    // Check for changes in data
+    checkForChanges: () => {
+      const currentBooks = JSON.stringify(window.appData.getBooks());
+      const currentRequests = JSON.stringify(window.appData.getRequests());
+      const currentNotifications = JSON.stringify(window.appData.getNotifications());
+
+      if (currentBooks !== window.appData._lastBooksState) {
+        window.appData._lastBooksState = currentBooks;
+        window.dispatchEvent(new Event('booksUpdated'));
+      }
+
+      if (currentRequests !== window.appData._lastRequestsState) {
+        window.appData._lastRequestsState = currentRequests;
+        window.dispatchEvent(new Event('requestsUpdated'));
+      }
+
+      if (currentNotifications !== window.appData._lastNotificationsState) {
+        window.appData._lastNotificationsState = currentNotifications;
+        window.dispatchEvent(new Event('notificationsUpdated'));
+      }
+    },
+
+    // Start polling for changes
+    startPolling: (interval = 1000) => {
+      window.appData._pollingInterval = setInterval(() => {
+        window.appData.checkForChanges();
+      }, interval);
+    },
+
+    // Stop polling
+    stopPolling: () => {
+      if (window.appData._pollingInterval) {
+        clearInterval(window.appData._pollingInterval);
+        window.appData._pollingInterval = null;
+      }
     },
   };
 

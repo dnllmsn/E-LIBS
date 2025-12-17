@@ -28,24 +28,21 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: var(--text-dark); /* Changed to dark text */
   margin: 0;
-  padding: 20px 0; /* Add padding to the top */
+  padding: 0; /* Remove padding */
   line-height: 1.6;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient-animation 15s ease infinite;
-  min-height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align content to the top */
+  min-height: 100vh;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px 0 20px; /* Add padding to the top */
+  padding: 20px;
   width: 100%;
+  flex-grow: 1;
 }
-
 /* --- Glassmorphism Auth Form --- */
 .auth-form {
   width: 100%;
@@ -63,7 +60,6 @@ body {
 
 .auth-container {
   margin: auto; /* Center the auth-container within the flex .container */
-  transform: translateX(-100px); /* Shift slightly to the left */
 }
 .auth-form h2 {
     text-align: center;
@@ -129,7 +125,7 @@ header, nav, .main-content, .book-card, .request-item, .book-management-item, .s
   background: none;
   border: none;
   box-shadow: none;
-  padding: 25px;
+  padding: 0;
   margin-bottom: 20px;
 }
 
@@ -223,6 +219,10 @@ nav { padding: 1.5rem; }
     box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+.book-card.clickable {
+    cursor: pointer;
+}
+
 .book-cover {
   width: 100%;
   height: 200px;
@@ -252,7 +252,7 @@ nav { padding: 1.5rem; }
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   font-size: 1rem;
-  color: var(--text-light);
+  color: #fff;
   box-sizing: border-box;
 }
 
@@ -263,6 +263,17 @@ nav { padding: 1.5rem; }
 #searchInput:focus, .form-group input:focus, .management-actions select:focus {
   outline: none;
   border-color: var(--primary-pink);
+}
+
+.management-actions select option {
+    background-color: #333;
+    color: #fff;
+}
+
+.management-actions select option:checked {
+    background: linear-gradient(#4CAF50, #4CAF50);
+    background-color: #4CAF50;
+    color: #fff;
 }
 
 /* Specific adjustments */
@@ -302,15 +313,43 @@ nav { padding: 1.5rem; }
 
 .book-management-item {
     display: flex;
-    align-items: center; /* Align image and text vertically */
+    align-items: stretch; /* Stretch items to same height */
     justify-content: space-between; /* Space out book info and management actions */
     gap: 15px; /* Space between the info block and actions block */
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 .book-info {
     display: flex;
     align-items: center; /* Align thumbnail and text inside book-info */
     gap: 15px; /* Space between thumbnail and text */
+    flex: 1;
+}
+
+.book-info > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.management-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.management-actions select {
+    min-width: 150px;
+}
+
+.management-actions .update-status-btn {
+    white-space: nowrap;
 }
 
 .book-cover-thumbnail {
@@ -500,4 +539,211 @@ nav { padding: 1.5rem; }
 /* Adjust header h1 style if necessary to make sure it aligns well with the logo */
 .header-with-logo h1 {
   margin: 0; /* Remove default margin to control spacing with gap */
+}
+
+/* --- Notification Panel --- */
+.notification-panel {
+    width: 320px; /* Slightly wider */
+    background: rgba(0, 0, 0, 0.15); /* Darker background */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 20px;
+    color: #fff;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-height: calc(100vh - 40px);
+    overflow-y: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
+
+.notification-panel h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.6rem; /* Larger title */
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+#notification-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#notification-list li {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Add border */
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 12px; /* Increased margin */
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+}
+
+#notification-list li:hover {
+    background: rgba(255, 255, 255, 0.2); /* Brighter on hover */
+    transform: scale(1.02); /* Slight zoom effect */
+}
+
+#notification-list li .book-title {
+    font-weight: bold;
+}
+
+#notification-list li .student-name {
+    display: block;
+    margin-top: 5px;
+    color: #ddd;
+}
+
+#notification-list li .notification-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#notification-list li .notification-content .delete-notification-btn {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    pointer-events: auto;
+    z-index: 100;
+}
+
+#notification-list li .notification-content .delete-notification-btn:hover {
+    color: #ff4444;
+    transform: scale(1.2);
+}
+
+#notification-list li .notification-content .delete-notification-btn i {
+    pointer-events: none;
+}
+
+#notification-list li .actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+#notification-list li .actions .btn {
+    flex-grow: 1;
+}
+
+/* Adjust main container to work with the new layout */
+.container {
+    flex-grow: 1;
+    padding: 20px;
+    margin-right: 340px; /* Space for fixed notification panel (300px width + 20px right + 20px gap) */
+}
+
+/* --- Notification States --- */
+#notification-list li.read {
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.6;
+}
+
+#notification-list li.read .book-title {
+    font-weight: normal;
+}
+
+.hidden {
+    display: none;
+}
+
+.book-card {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    text-align: left;
+}
+
+.book-card h3 {
+    margin: 10px 0 5px 0;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.book-card p {
+    margin: 0 0 10px 0;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    width: fit-content;
+    height: 25px;
+    line-height: 25px;
+}
+
+.status-available {
+    background-color: var(--success-color);
+    color: #fff;
+}
+
+.status-pending {
+    background-color: var(--pending-color);
+    color: #000;
+}
+
+.status-borrowed {
+    background-color: var(--borrowed-color);
+    color: #fff;
+}
+
+.status-reserved {
+    background-color: var(--reserved-color);
+    color: #fff;
+}
+
+.borrow-btn {
+    width: auto;
+    padding: 5px 10px;
+    margin: 0;
+    background-color: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    position: relative;
+    display: inline-block;
+    line-height: 25px;
+    height: 25px;
+}
+
+.borrow-btn:hover {
+    background-color: #6B3410;
+}
+
+.borrow-btn:active {
+    transform: scale(0.98);
+}
+
+.main-layout {
+  display: flex;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: flex-start;
 }
