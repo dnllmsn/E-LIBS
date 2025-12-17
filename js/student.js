@@ -35,8 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
         displayBooks(searchTerm);
     });
 
+    // Listen for changes in localStorage from other tabs/windows
+    window.addEventListener('storage', (event) => {
+        console.log('Student: Storage event fired!', event.key);
+        if (event.key === 'books') {
+            console.log('Student: Books key changed in localStorage. Re-rendering displayBooks.');
+            displayBooks(searchInput.value.toLowerCase());
+        }
+    });
+
     function displayBooks(searchTerm = '') {
+        console.log('Student: displayBooks called. Current search term:', searchTerm);
         const books = window.appData.getBooks();
+        console.log('Student: Books retrieved from localStorage in displayBooks:', JSON.parse(JSON.stringify(books)));
         bookList.innerHTML = ''; // Clear existing list
 
         const filteredBooks = books.filter(book => 

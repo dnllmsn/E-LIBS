@@ -151,8 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const finalStatus = newStatus === 'Returned' ? 'Available' : newStatus;
 
         if (book) {
+            console.log(`Librarian: Updating book ID ${book.id} (${book.title}) from ${book.status} to ${finalStatus}`);
             book.status = finalStatus;
+            console.log('Librarian: Books array before saving:', JSON.parse(JSON.stringify(books))); // Deep copy for log
             window.appData.saveBooks(books);
+            console.log('Librarian: Books saved to localStorage.');
             showToast(`Book status updated to ${finalStatus}.`, 'success');
             renderDashboard();
         }

@@ -482,3 +482,22 @@ nav { padding: 1.5rem; }
     font-size: 1.2em;
 }
 
+.header-with-logo {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  justify-content: center; /* Center horizontally */
+  gap: 20px; /* Space between logo and text */
+  margin-bottom: 20px; /* Add some space below the header */
+}
+
+.header-logo {
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Should be same as width for a perfect circle */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+/* Adjust header h1 style if necessary to make sure it aligns well with the logo */
+.header-with-logo h1 {
+  margin: 0; /* Remove default margin to control spacing with gap */
+}
