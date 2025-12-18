@@ -540,11 +540,10 @@ nav { padding: 1.5rem; }
     background: rgba(0, 0, 0, 0.15); /* Darker background */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 20px;
-    color: #fff;
-    max-height: calc(100vh - 40px);
     border-radius: 15px;
-    overflow-y: hidden;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px; /* Add space below on mobile */
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
     border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
 }
@@ -553,7 +552,7 @@ nav { padding: 1.5rem; }
     text-align: center;
     margin-top: 0;
     margin-bottom: 20px;
-    font-size: 1.6rem; /* Larger title */
+    font-size: 1.6rem;
     font-weight: 600;
     text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
@@ -561,42 +560,34 @@ nav { padding: 1.5rem; }
 #notification-list {
     list-style-type: none;
     padding: 0;
+    margin: 0;
+    max-height: 400px; /* Give a max height for scrolling on mobile */
+    overflow-y: auto;
 }
 
 #notification-list li {
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Add border */
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     padding: 15px;
-    margin-bottom: 12px; /* Increased margin */
+    margin-bottom: 12px;
     font-size: 0.9rem;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #notification-list li:hover {
-    background: rgba(255, 255, 255, 0.2); /* Brighter on hover */
-    transform: scale(1.02); /* Slight zoom effect */
-}
-
-#notification-list li .book-title {
-    font-weight: bold;
-}
-
-#notification-list li .student-name {
-    display: block;
-    margin-top: 5px;
-    color: #ddd;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
 }
 
 #notification-list li .notification-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
 }
 
-#notification-list li .notification-content .delete-notification-btn {
+#notification-list li .delete-notification-btn {
     background: none;
     border: none;
     color: #ff6b6b;
@@ -605,39 +596,31 @@ nav { padding: 1.5rem; }
     padding: 5px;
     transition: all 0.3s ease;
     flex-shrink: 0;
-    pointer-events: auto;
-    z-index: 100;
 }
 
-#notification-list li .notification-content .delete-notification-btn:hover {
+#notification-list li .delete-notification-btn:hover {
     color: #ff4444;
     transform: scale(1.2);
 }
 
-#notification-list li .notification-content .delete-notification-btn i {
+#notification-list li .delete-notification-btn i {
     pointer-events: none;
 }
 
-#notification-list li .actions {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
+/* --- Main Layout & Responsiveness --- */
+.main-layout {
+  display: flex;
+  flex-direction: column; /* Stack container and panel by default */
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  align-items: center; /* Center items */
 }
-
-#notification-list li .actions .btn {
-    flex-grow: 1;
-}
-
-/* No longer need to adjust the container margin, as flexbox handles it */
 
 /* --- Notification States --- */
 #notification-list li.read {
     background: rgba(255, 255, 255, 0.05);
     opacity: 0.6;
-}
-
-#notification-list li.read .book-title {
-    font-weight: normal;
 }
 
 .hidden {
@@ -723,11 +706,43 @@ nav { padding: 1.5rem; }
     transform: scale(0.98);
 }
 
-.main-layout {
-  display: flex;
-  width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: flex-start;
+
+/* --- DESKTOP VIEW --- */
+/* For screens wider than 1024px, use the side-panel layout */
+@media (min-width: 1025px) {
+  .main-layout {
+    flex-direction: row; /* Side-by-side */
+    align-items: flex-start;
+  }
+  
+  .main-layout > .container {
+    margin-right: 20px; /* Add a gap between content and panel */
+  }
+  
+  .notification-panel {
+    width: 320px;
+    flex-shrink: 0; /* Prevent panel from shrinking */
+    margin-bottom: 0; /* Remove mobile margin */
+  }
+
+  #notification-list {
+    /* Allow scrolling within the panel if content overflows */
+    max-height: calc(100vh - 140px);
+  }
+}
+
+/* --- MOBILE VIEW --- */
+/* Overrides for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .book-list {
+    grid-template-columns: 1fr; /* Single column layout for books */
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
 }
