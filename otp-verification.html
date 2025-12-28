@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/otp.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-box">
+        <h2>OTP Verification</h2>
+        <div id="method-selection" class="input-options">
+          <h3>Choose OTP Method:</h3>
+          <label for="otp-method-sms">
+            <input type="radio" id="otp-method-sms" name="otp-method" value="sms" checked /> SMS
+          </label>
+          <label for="otp-method-email">
+            <input type="radio" id="otp-method-email" name="otp-method" value="email" /> Email
+          </label>
+        </div>
+        <div id="phone-step">
+          <p>Please enter your contact information to receive an OTP.</p>
+          <div class="input-box" id="phone-input-box">
+            <input type="tel" id="phone-number-input" required />
+            <label>Phone Number</label>
+          </div>
+          <div class="input-box" id="email-input-box" style="display: none;">
+            <input type="email" id="email-address-input" required />
+            <label>Email Address</label>
+          </div>
+          <button id="send-otp-btn" class="btn">Send OTP</button>
+        </div>
+        <div id="otp-step" style="display: none">
+          <p>An OTP has been sent to your phone number.</p>
+          <div class="input-box">
+            <input type="text" id="otp-input" required />
+            <label>Enter OTP</label>
+          </div>
+          <button id="verify-otp-btn" class="btn">Verify OTP</button>
+        </div>
+        <div id="message"></div>
+      </div>
+    </div>
+    <script src="js/otp.js"></script>
+  </body>
+</html>
