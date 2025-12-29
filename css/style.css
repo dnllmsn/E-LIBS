@@ -1,69 +1,42 @@
-<<<<<<< HEAD
-/* ==================== RESET ==================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ==================== ROOT VARIABLES ==================== */
-=======
-/* --- PTC Library System: Animated Gradient Card Theme --- */
-
->>>>>>> 1c6bcf46887da9a243b0528a4be3259aaf81e350
 :root {
   --primary-green: #10b981;
   --primary-green-light: #34d399;
   --secondary-green: #6ee7b7;
   --dark-color: #0f3d2c;
-  --white-color: #bbf7d0;
+  --white-color: #f9fafb;
   --shadow-green: rgba(16, 185, 129, 0.45);
+  --success-color: var(--primary-green);
+  --error-color: #F44336; /* Keeping red for errors for universal understanding */
+  --pending-color: var(--secondary-green);
+  --borrowed-color: var(--dark-color);
+  --reserved-color: var(--primary-green-light);
   --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  
-  --primary-pink: #ff85a2;
-  --text-light: #1E8449; /* Slightly darker light text */
-  --text-dark: #0f3d2c; /* Using user's dark color */
-  --border-color: rgba(40, 167, 69, 0.2); /* Softer border */
-  --success-color: #4CAF50;
-  --error-color: #f44336;
-  --pending-color: #ffc107;
-  --reserved-color: #2196F3;
-  --borrowed-color: #673AB7;
-}
-
-/* ==================== GLOBAL STYLES ==================== */
-html {
-  scroll-behavior: smooth;
-}
-
-html, body {
-  height: 100%;
-}
-
-/* --- PTC Library System: Animated Gradient Card Theme --- */
-
-
-/* --- Animated Gradient --- */
-@keyframes gradient-animation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  --text-dark: var(--dark-color);
+  --text-light: var(--dark-color); /* Adjusted to dark for better contrast on light backgrounds */
+  --border-color: rgba(16, 185, 129, 0.3); /* Using primary green for subtle borders */
 }
 
 body {
   font-family: var(--font-family);
-  color: var(--text-dark); /* Changed to dark text */
-  margin: 0;
-  line-height: 1.6;
-  background: var(--white-color);
+  color: var(--text-dark);
+  background-color: #FFFFF0; /* Super light pastel yellow */
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center; /* Center horizontally */
 }
 
-body.student-page {
-  /* The background is now inherited from the body style */
+.auth-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+}
+
+.back-to-home {
+    margin-top: 20px;
 }
 
 .container {
@@ -72,20 +45,34 @@ body.student-page {
   padding: 20px;
   width: 100%;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center children horizontally */
 }
 /* --- Glassmorphism Auth Form --- */
 .auth-form {
   width: 100%;
   max-width: 480px; /* Widen the form card */
-  background: linear-gradient(135deg, rgba(248, 200, 220, 0.3), rgba(189, 236, 182, 0.3)); /* Pastel pink and green glassmorphism */
+  background: rgba(110, 231, 183, 0.1); /* Using secondary-green with transparency */
   backdrop-filter: blur(10px); /* The "glass" effect */
   -webkit-backdrop-filter: blur(10px); /* Safari support */
   border: 1px solid var(--border-color); /* Subtle edge using softer border variable */
   border-radius: 15px;
   padding: 40px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Professional shadow */
-  color: var(--text-dark); /* Changed to dark text for better contrast */
+  color: var(--dark-color); /* Changed to dark text for better contrast */
   margin: 0 auto; /* Center the form if its container is wider */
+}
+
+.glassmorphism-card {
+  background: rgba(110, 231, 183, 0.5); /* Using secondary-green with transparency */
+  backdrop-filter: blur(10px); /* The "glass" effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid var(--border-color); /* Subtle edge using softer border variable */
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Professional shadow */
+  padding: 20px; /* Default padding for glassmorphism cards */
+  margin-bottom: 20px; /* Add some space between cards */
 }
 
 .auth-container {
@@ -93,10 +80,15 @@ body.student-page {
 }
 .auth-form h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-size: 2rem;
     font-weight: 600;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.auth-form p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--dark-color); /* Changed to dark-color */
 }
 
 .form-group {
@@ -108,6 +100,7 @@ body.student-page {
     margin-bottom: 0.5rem;
     font-weight: 500;
 }
+
 
 /* --- Forms & Inputs --- */
 .form-group input {
@@ -150,19 +143,12 @@ body.student-page {
     font-size: inherit; /* Match surrounding text size */
 }
 
-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 /* Add margin to separate sections */
-header, nav, .main-content, .book-list, .request-item, .book-management-item, .search-container, .toast {
+.book-list, .request-item, .book-management-item, .search-container, .toast {
   margin-bottom: 20px;
 }
 
-header h1, header p, .book-card h3, .book-card p {
+.book-card h3, .book-card p {
     text-shadow: none;
 }
 
@@ -170,12 +156,12 @@ header h1 {
   margin: 0;
   font-size: 2.8rem;
   font-weight: 700;
-  color: var(--dark-color);
+  color: var(--dark-color); /* Set header h1 color to dark-color */
 }
 
 header p {
   margin: 5px 0 0;
-  color: var(--text-light);
+  color: var(--dark-color); /* Set header p color to dark-color */
   font-size: 1.1rem;
 }
 
@@ -197,9 +183,9 @@ nav { padding: 1.5rem; }
 
 
 .btn {
-  background-color: var(--primary-green);
-  color: #fff;
-  border: 1px solid var(--primary-green);
+  background-color: var(--primary-green); /* Button background set to primary green */
+  color: var(--white-color); /* Button text set to white color */
+  border: 1px solid var(--primary-green); /* Button border set to primary green */
   padding: 10px 15px;
   text-decoration: none;
   font-size: 0.9rem;
@@ -214,10 +200,14 @@ nav { padding: 1.5rem; }
 
 
 .btn:hover {
-  background-color: var(--primary-green-light);
-  border-color: var(--primary-green-light);
+  background-color: var(--primary-green-light); /* Hover background set to primary green light */
+  border-color: var(--primary-green-light); /* Hover border set to primary green light */
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px var(--shadow-green);
+  box-shadow: 0 4px 8px var(--shadow-green); /* Hover box-shadow set to shadow green */
+}
+
+.main-nav .btn {
+  background-color: var(--primary-green); /* Main nav button background set to primary green */
 }
 
 .nav-buttons .btn {
@@ -225,16 +215,22 @@ nav { padding: 1.5rem; }
 }
 
 .book-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   margin-top: 30px;
+  width: 100%;
 }
 
 .book-card {
   transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
   flex-direction: column;
+  width: 250px;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .book-card:hover {
@@ -263,11 +259,14 @@ nav { padding: 1.5rem; }
 
 .book-info .status {
     font-size: 0.9em; /* Make status text a bit bigger */
-<<<<<<< HEAD
     color: var(--text-light) !important; /* Ensure status text is white and override any other color */
-=======
-    color: #fff; /* Ensure status text is white */
->>>>>>> 1c6bcf46887da9a243b0528a4be3259aaf81e350
+}
+
+
+.search-container {
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
 }
 
 /* --- Forms & Inputs --- */
@@ -310,8 +309,8 @@ nav { padding: 1.5rem; }
     justify-content: space-between;
     align-items: center;
     padding: 15px; /* Add some padding */
-    background: #fff;
-    border: 1px solid #e2e8f0;
+    background: var(--white-color); /* Background set to white-color */
+    border: 1px solid var(--border-color); /* Border set to border-color */
     border-radius: 15px;
     margin-bottom: 10px;
 }
@@ -325,7 +324,7 @@ nav { padding: 1.5rem; }
 
 .request-details {
     flex-grow: 1; /* Allow details to take up space before the image */
-    color: var(--dark-color); /* Ensure text is white */
+    color: var(--dark-color); /* Ensure text is dark-color */
 }
 
 .request-book-thumbnail {
@@ -333,7 +332,7 @@ nav { padding: 1.5rem; }
     height: 80px;
     object-fit: cover;
     border-radius: 5px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color); /* Border set to border-color */
     flex-shrink: 0; /* Prevent image from shrinking */
 }
 
@@ -343,8 +342,8 @@ nav { padding: 1.5rem; }
     justify-content: space-between; /* Space out book info and management actions */
     gap: 15px; /* Space between the info block and actions block */
     padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(249, 250, 251, 0.1); /* Using white-color with transparency */
+    border: 1px solid var(--border-color); /* Border set to border-color */
     border-radius: 8px;
     margin-bottom: 15px;
 }
@@ -383,7 +382,7 @@ nav { padding: 1.5rem; }
     height: 110px;
     object-fit: cover;
     border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-color); /* Border set to border-color */
 }
 
 
@@ -409,11 +408,8 @@ nav { padding: 1.5rem; }
 }
 
 .section-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   max-width: 800px; /* Limit width for readability */
   width: 90%; /* Responsive width */
   text-align: left; /* Ensure text is left-aligned within the card */
@@ -425,7 +421,7 @@ nav { padding: 1.5rem; }
   font-weight: 700; /* Make bold */
   margin-top: 0;
   margin-bottom: 15px;
-  color: var(--dark-color); /* Set color to white */
+  color: var(--dark-color); /* Set color to dark-color */
   text-align: center; /* Center vision/mission/objective titles */
 }
 
@@ -434,6 +430,7 @@ nav { padding: 1.5rem; }
   line-height: 1.8;
   margin-bottom: 10px;
   text-align: center; /* Center paragraph text */
+  color: var(--dark-color); /* Set color to dark-color */
 }
 
 .section-card ul {
@@ -448,6 +445,7 @@ nav { padding: 1.5rem; }
   margin-bottom: 8px;
   font-size: 1.05rem;
   line-height: 1.6;
+  color: var(--dark-color); /* Set color to dark-color */
 }
 
 .section-card ul li::before {
@@ -470,7 +468,7 @@ nav { padding: 1.5rem; }
     padding: 0;
 }
 .toggle-link button:hover {
-    color: var(--primary-pink);
+    color: var(--primary-green-light); /* Changed to primary-green-light */
 }
 .hidden {
     display: none;
@@ -491,11 +489,11 @@ nav { padding: 1.5rem; }
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #a2d5ab; /* Lighter color for the icon */ /* Lighter color for the icon */
+    color: var(--secondary-green); /* Lighter color for the icon */
 }
 
 .toggle-password:hover {
-    color: #fff; /* White on hover */
+    color: var(--primary-green); /* White on hover */
 }
 
 /* --- Toast Notifications --- */
@@ -511,8 +509,8 @@ nav { padding: 1.5rem; }
 }
 
 .toast {
-    background-color: rgba(50, 50, 50, 0.9);
-    color: #fff;
+    background-color: var(--dark-color); /* Changed to dark-color */
+    color: var(--white-color); /* Changed to white-color */
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -548,6 +546,7 @@ nav { padding: 1.5rem; }
 .header-with-logo {
   display: flex;
   align-items: center; /* Vertically align items */
+  flex-direction: row; /* Ensure elements are in a row */
   justify-content: center; /* Center horizontally */
   gap: 20px; /* Space between logo and text */
   margin-bottom: 20px; /* Add some space below the header */
@@ -567,27 +566,17 @@ nav { padding: 1.5rem; }
 
 /* --- Notification Panel --- */
 .notification-panel {
-<<<<<<< HEAD
-  width: 100%; /* Default to full width */
-  background: #ffffff; /* White background to stand out on green body */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 320px;
+  background: var(--white-color); /* Background set to white-color */
   border-radius: 15px;
   padding: 20px;
-  color: var(--dark-color);
-  border: 1px solid #e2e8f0;
-  margin: 20px 0; /* Add margin for stacked layout */
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-=======
-    width: 320px; /* Slightly wider */
-    background: rgba(0, 0, 0, 0.15); /* Darker background */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 15px;
-    color: #fff;
-    padding: 20px;
-    margin-bottom: 20px; /* Add space below on mobile */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
->>>>>>> 1c6bcf46887da9a243b0528a4be3259aaf81e350
+  color: var(--dark-color); /* Color set to dark-color */
+  border: 1px solid var(--border-color); /* Border set to border-color */
+  box-shadow: 0 4px 6px -1px var(--shadow-green), 0 2px 4px -1px var(--shadow-green); /* Box-shadow set to shadow-green */
+  z-index: 1000;
 }
 
 .notification-panel h2 {
@@ -602,13 +591,13 @@ nav { padding: 1.5rem; }
     list-style-type: none;
     padding: 0;
     margin: 0;
-    max-height: 400px; /* Give a max height for scrolling on mobile */
+    max-height: 400px;
     overflow-y: auto;
 }
 
 #notification-list li {
-    background: #fff;
-    border: 1px solid #e2e8f0;
+    background: var(--white-color); /* Background set to white-color */
+    border: 1px solid var(--border-color); /* Border set to border-color */
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 12px;
@@ -617,7 +606,7 @@ nav { padding: 1.5rem; }
 }
 
 #notification-list li:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(110, 231, 183, 0.2); /* Using secondary-green with transparency */
     transform: scale(1.02);
 }
 
@@ -648,19 +637,11 @@ nav { padding: 1.5rem; }
     pointer-events: none;
 }
 
-/* --- Main Layout & Responsiveness --- */
-.main-layout {
-  display: flex;
-  flex-direction: column; /* Stack container and panel by default */
-  width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
-  align-items: center; /* Center items */
-}
+
 
 /* --- Notification States --- */
 #notification-list li.read {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(110, 231, 183, 0.05); /* Using secondary-green with transparency */
     opacity: 0.6;
 }
 
@@ -670,11 +651,11 @@ nav { padding: 1.5rem; }
 
 .book-card {
     padding: 15px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: var(--white-color); /* Background set to white-color */
+    border: 1px solid var(--border-color); /* Border set to border-color */
     border-radius: 8px;
     text-align: left;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px var(--shadow-green), 0 2px 4px -1px var(--shadow-green); /* Box-shadow set to shadow-green */
 }
 
 .book-card h3 {
@@ -685,7 +666,7 @@ nav { padding: 1.5rem; }
 
 .book-card p {
     margin: 0 0 10px 0;
-    color: var(--text-light);
+    color: var(--dark-color); /* Changed to dark-color */
     font-size: 0.95rem;
 }
 
@@ -702,46 +683,38 @@ nav { padding: 1.5rem; }
 }
 
 .status-available {
-    background-color: var(--success-color);
-    color: #fff;
+    background-color: var(--primary-green);
+    color: var(--white-color);
 }
 
 .status-pending {
     background-color: var(--pending-color);
-    color: #000;
+    color: var(--dark-color);
 }
 
 .status-borrowed {
     background-color: var(--borrowed-color);
-    color: #fff;
+    color: var(--white-color);
 }
 
 .status-reserved {
     background-color: var(--reserved-color);
-    color: #fff;
+    color: var(--white-color);
 }
 
 .borrow-btn {
-    width: auto;
-    padding: 5px 10px;
     margin: 0;
-    background-color: #8B4513;
-    color: #fff;
+    background-color: var(--primary-green); /* Background set to primary-green */
+    color: var(--white-color); /* Color set to white-color */
     border: none;
-    border-radius: 5px;
-    font-size: 0.85rem;
-    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
     position: relative;
-    display: inline-block;
-    line-height: 25px;
-    height: 25px;
 }
 
 .borrow-btn:hover {
-    background-color: #6B3410;
+    background-color: var(--primary-green-light); /* Hover background set to primary-green-light */
 }
 
 .borrow-btn:active {
@@ -787,6 +760,12 @@ nav { padding: 1.5rem; }
   header h1 {
     font-size: 2rem;
   }
+  .notification-panel {
+    position: relative;
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
 }
 
 /* --- OTP Modal --- */
@@ -805,21 +784,21 @@ nav { padding: 1.5rem; }
 }
 
 .modal-content {
-    background: linear-gradient(135deg, rgba(248, 200, 220, 0.3), rgba(189, 236, 182, 0.3));
+    background: rgba(110, 231, 183, 0.3); /* Using secondary-green with transparency */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-green); /* Border set to primary-green */
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    color: var(--text-dark);
+    color: var(--dark-color); /* Color set to dark-color */
     width: 90%;
     max-width: 480px;
     position: relative;
 }
 
 .close-btn {
-    color: var(--text-dark);
+    color: var(--dark-color);
     position: absolute;
     top: 15px;
     right: 20px;
@@ -830,7 +809,7 @@ nav { padding: 1.5rem; }
 
 .close-btn:hover,
 .close-btn:focus {
-    color: var(--primary-pink);
+    color: var(--primary-green); /* Changed to primary-green */
     text-decoration: none;
 }
 

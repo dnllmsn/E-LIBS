@@ -1,3 +1,38 @@
+/* Modal Overlay Styles */
+.modal {
+    position: fixed;
+    z-index: 1001; /* Ensure it's above other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Semi-transparent background for the overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Optional: backdrop-filter for a subtle blur behind the modal itself */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* Modal Content (Glassmorphism Box) Styles */
+.modal-content {
+    background: rgba(240, 255, 240, 0.9); /* Lighter background for better text visibility */
+    backdrop-filter: blur(10px); /* The "glass" effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid var(--border-color); /* Subtle edge using softer border variable */
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Professional shadow */
+    color: var(--dark-color); /* Use dark-color from global stylesheet */
+    width: 90%;
+    max-width: 480px; /* Max width for the modal content */
+    position: relative;
+    text-align: center; /* Center text inside the modal content */
+}
+
+/* Existing input options styles */
 .input-options {
   display: flex;
   justify-content: center;
@@ -11,11 +46,10 @@
   gap: 5px;
   cursor: pointer;
   font-size: 1em;
-  color: #333;
+  color: var(--dark-color); /* Use dark-color */
 }
 
 .input-options input[type="radio"] {
-  /* Hide default radio button */
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -29,14 +63,14 @@
 }
 
 .input-options input[type="radio"]:checked {
-  border-color: #007bff; /* Accent color when checked */
+  border-color: var(--primary-green);
 }
 
 .input-options input[type="radio"]:checked::before {
   content: '';
   width: 10px;
   height: 10px;
-  background-color: #007bff; /* Inner dot color when checked */
+  background-color: var(--primary-green);
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -45,5 +79,86 @@
 }
 
 .input-options label:hover input[type="radio"] {
-  border-color: #0056b3; /* Darker accent on hover */
+  border-color: var(--primary-green-light);
+}
+
+/* General form element styling within the modal-content */
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+}
+
+.modal-content p {
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.modal-content .input-box {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.modal-content .input-box input {
+    width: calc(100% - 24px); /* Adjust for padding */
+    padding: 12px;
+    border: 1px solid var(--border-color); /* Border set to border-color */
+    background: rgba(249, 250, 251, 0.2); /* Semi-transparent background using white-color */
+    border-radius: 8px;
+    color: var(--dark-color); /* Input text color */
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.modal-content .input-box input:focus {
+    outline: none;
+    border-color: var(--primary-green); /* Focus border-color set to primary-green */
+    box-shadow: 0 0 0 3px var(--shadow-green); /* Focus box-shadow set to shadow-green */
+}
+
+.modal-content .input-box label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: rgba(15, 61, 44, 0.5); /* Placeholder color using dark-color with transparency */
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.modal-content .input-box input:focus + label,
+.modal-content .input-box input:not(:placeholder-shown) + label {
+    top: 0px;
+    left: 10px;
+    font-size: 0.75em;
+    color: var(--primary-green); /* Label color on focus/not empty set to primary-green */
+    background-color: var(--white-color); /* Label background on focus/not empty set to white-color */
+    padding: 0 5px;
+    border-radius: 3px;
+}
+
+.modal-content .btn {
+    background-color: var(--primary-green); /* Background set to primary-green */
+    color: var(--white-color); /* Color set to white-color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.modal-content .btn:hover {
+    background-color: var(--primary-green-light); /* Hover background set to primary-green-light */
+}
+
+#phone-step,
+#otp-step {
+  margin-bottom: 20px;
+}
+
+#message {
+  margin-top: 15px;
+  color: var(--error-color); /* Changed to error-color */
+  text-align: center;
 }
