@@ -7,9 +7,9 @@
   --shadow-green: rgba(16, 185, 129, 0.45);
   --success-color: var(--primary-green);
   --error-color: #F44336; /* Keeping red for errors for universal understanding */
-  --pending-color: var(--secondary-green);
-  --borrowed-color: var(--dark-color);
-  --reserved-color: var(--primary-green-light);
+  --pending-color: #FFA500; /* Orange */
+  --borrowed-color: #0000FF; /* Blue */
+  --reserved-color: #800080; /* Purple */
   --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --text-dark: var(--dark-color);
   --text-light: var(--dark-color); /* Adjusted to dark for better contrast on light backgrounds */
@@ -259,7 +259,6 @@ nav { padding: 1.5rem; }
 
 .book-info .status {
     font-size: 0.9em; /* Make status text a bit bigger */
-    color: var(--text-light) !important; /* Ensure status text is white and override any other color */
 }
 
 
@@ -678,8 +677,8 @@ nav { padding: 1.5rem; }
     font-weight: 600;
     margin-bottom: 10px;
     width: fit-content;
-    height: 25px;
-    line-height: 25px;
+    height: 30px;
+    line-height: 30px;
 }
 
 .status-available {
@@ -689,7 +688,7 @@ nav { padding: 1.5rem; }
 
 .status-pending {
     background-color: var(--pending-color);
-    color: var(--dark-color);
+    color: var(--white-color);
 }
 
 .status-borrowed {
@@ -697,8 +696,14 @@ nav { padding: 1.5rem; }
     color: var(--white-color);
 }
 
+
 .status-reserved {
     background-color: var(--reserved-color);
+    color: var(--white-color);
+}
+
+.status-returned {
+    background-color: #6c757d;
     color: var(--white-color);
 }
 
